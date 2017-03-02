@@ -3,15 +3,63 @@
     <head>
         <title>Build-a-Blog</title>
         <style type="text/css">
-            .error {
+        body {
+          background-color: #06a;
+        }
+        h1 {
+          font-size: 4vmin;
+        }
+            .eror {
                 color: red;
+            }
+            .c {
+              text-align: center;
+            }
+            table, td {
+              border: 6px solid #00a;
+              border-collapse: collapse;
+            }
+            .t {
+              width: 90vmin;
+              min-width: 50%;
+              margin:auto;
+              background-color: white;
+            }
+            .b {
+              border: 0.5vmin solid black;
+              padding: 2vmin;
+            }
+            .h {
+              font-size: 2.5vmin;
+            }
+            .sm {
+              font-size: 1.5vmin;
             }
         </style>
     </head>
     <body>
-        <h1>
-            Build a Blog
-        </h1>
+      <table class="t c">
+        <tr>
+          <td colspan="2">
+            <h1>
+              Build-a-Blog
+            </h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="/">
+              <p class="h">Add Entree</p>
+            </a>
+          </td>
+          <td>
+            <a href="/blog">
+            		<p class="h">View Entrees</p>
+            </a>
+          </td>
+        </tr>
+      </table>
+
 
         {% block content %}
         {% endblock %}

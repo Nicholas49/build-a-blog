@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{% for t in teksts %}
+<br>
+<div class="t b">
+<div class="h"><a href=blog/{{t.key().id()}}>{{t.taitl}}</a></div>
+<div class="sm">Submitted on {{t.krieited}}</div>
+<hr>
+<div class="sm">{{t.tekst}}</div></div>
+
+{% endfor %}
+
+{% endblock %}

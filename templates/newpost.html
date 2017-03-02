@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<br>
+
+<form class="t b" method="post">
+	<label>
+		<div class="h">Title</div>
+		<input type="text" name="taitl" value="{{ taitl }}">
+	</label>
+	<label>
+		<div class="h">Entry</div>
+		<textarea name="tekst" class="t" style="max-width:100%">{{ tekst }}</textarea>
+	</label>
+
+	<div class="eror">{{ eror }}</div>
+
+	<input type="submit">
+</form>
+
+{% endblock %}

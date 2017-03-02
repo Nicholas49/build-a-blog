@@ -18,11 +18,49 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-class index(Handler):
-    def get(self):
+class submyxen(db.Model):
+    taitl = db.StringProperty(required = True)
+    tekst = db.TextProperty(required = True)
+    krieited = db.DateTimeProperty(auto_now_add = True)
 
-        self.render("edit.html")
+
+class index(Handler):
+
+
+    def get(self):
+        self.render("newpost.html", taitl="", tekst="", eror="")
+
+    def post(self):
+        taitl = self.request.get("taitl")
+        tekst = self.request.get("tekst")
+
+        if taitl and tekst:
+            a = submyxen(taitl = taitl, tekst = tekst)
+            a.put()
+
+            self.redirect("/blog/" + str(a.key().id()))
+        else:
+            eror = "Please enter a title and a message!"
+            self.render("newpost.html", taitl=taitl, tekst=tekst, eror=eror)
+
+class blaug(Handler):
+
+    def get(self):
+        teksts = db.GqlQuery("select * from submyxen order by krieited desc limit 5")
+        self.render("blog.html", teksts=teksts)
+
+class blaug_post(Handler):
+
+    def get(self, id):
+
+        stuf = submyxen.get_by_id(int(id))
+
+        self.render("blog_post.html", dqunk=stuf)
+
+
 
 app = webapp2.WSGIApplication([
-    ('/', index)
+    ('/', index),
+    ('/blog', blaug),
+    webapp2.Route('/blog/<id:\d+>', blaug_post)
 ], debug=True)
